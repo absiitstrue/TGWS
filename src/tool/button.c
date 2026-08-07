@@ -1,12 +1,10 @@
 int tgws_set_button_classic(
 int y,int x,
-int fgh, int fgw,int numbt){
-    static int butc[300]={-1};
+int fgh, int fgw){
 int g =0;
     if(mx>=x && my>=y && mx<=fgw+x && my<=y+fgh){g=1;
-    if(mbtn ==0&&butc[numbt]!=0){g=2;}
-    else if(mbtn ==2&&butc[numbt]!=2){g=3;}}
-    butc[numbt]=mbtn;
+    if(mbtn ==0&&prew!=0){g=2;}
+    else if(mbtn ==2&&prew!=2){g=3;}}
     return g;
 }
 

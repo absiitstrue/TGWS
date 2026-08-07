@@ -50,8 +50,8 @@ int* tgws_call_palitra(int y, int x){
     
     tgws_print_label(y+34,x+49,"[OK]");
     tgws_print_label(y+34,x+55,"[CLOSE]");
-    nnn=tgws_set_button_classic(y+34,x+49,1,4,299); if(nnn==2){fcl_palitra=0;nnn=0;rret=0;};
-    nnn=tgws_set_button_classic(y+34,x+55,1,7,298); if(nnn==2){fcl_palitra=0;nnn=0;rret=1;};
+    nnn=tgws_set_button_classic(y+34,x+49,1,4); if(nnn==2){fcl_palitra=0;nnn=0;rret=0;};
+    nnn=tgws_set_button_classic(y+34,x+55,1,7); if(nnn==2){fcl_palitra=0;nnn=0;rret=1;};
     tgws_print_label(y + 1, x + 1, "R G B |H S V");
     tgws_draw_grandient_3color(opr, opg, opb, 255, 255, 255, 0, 0, 0, y + 1, x + 17, 45, 45);
     tgws_draw_border(1, 255, 255, 255, y, x + 15,35, 47);

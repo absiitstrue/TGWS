@@ -9,13 +9,14 @@
 #include <stdatomic.h>
 #include <signal.h>
 #include <pthread.h>
+#include <stdarg.h>
 
 int fore =0,pos =0, prx =-1,pry=-1;
 int h,w,mx,my,mbtn,fpsw=120,refp=0;
 char (*display2)[64] = NULL;
 char (*display1)[64] = NULL;
 char *bufer = NULL;
-int bufersize;
+int bufersize,prew=-1;
 
 static int fcl_palitra=0,nn=0,nnn=0;
 
@@ -24,12 +25,19 @@ static int fcl_palitra=0,nn=0,nnn=0;
 #define wrdisplay1(row, col, ...) \
     snprintf(display1[(row) * w + (col)], 64, __VA_ARGS__)
 
+
+void fwrdisplay2(int row, int col, const char *format, ...) {
+    va_list args;
+    va_start(args, format);
+    vsnprintf(display2[row * w + col], 64, format, args);
+    va_end(args);
+}
 #include "./include/includetools.c"
 #include "./include/includesys.c"
 #include "./include/call_level2.c"
 
     int tgws_close_window(){printf("\033[?1049l");system("tput init");
-    
+   printf("\033[?25h"); 
     exit(1);}
 
     uint64_t get_time_us(void) {
@@ -48,6 +56,7 @@ int tgws_init_window(int argc, char *argv[]){
 
     setbuf(stdout, NULL); 
     printf("\033[?1049h");
+   printf("\033[?25l"); 
     bufersize =h*w*64;
 
     display2 = calloc(h * w, 64);if(!display2) exit(1);
@@ -60,7 +69,9 @@ for(int y =0;y<h;y++){for(int x=0;x<w;x++){wrdisplay2(y,x,"\033[0m ");};};
 
 int tgws_draw_element(){
 
+  prew = mbtn;
     uint64_t stt = get_time_us();
+
         
         mx = atomic_load(&mpx);
         my = atomic_load(&mpy);
@@ -88,6 +99,5 @@ uint64_t edt = get_time_us();
 uint64_t dt = edt - stt;refp = (dt > 0) ? (int)(1000000ULL / dt) : 0;   
 
 for(int y =0;y<h;y++){for(int x=0;x<w;x++){wrdisplay2(y,x,"\033[0m ");};};
-return 0;}
+  return 0;}
 
-    

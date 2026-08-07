@@ -1,8 +1,8 @@
 int tgws_draw_tablr(int r,int g,int b, int y, int x, int fgh, int fgw ,int *xy){
 
     wrdisplay2(y,x,"\033[38;2;%i;%i;%im\u250c",r,g,b);wrdisplay2(y+fgh,x,"\033[38;2;%i;%i;%im\u2514",r,g,b);wrdisplay2(y,x+fgw,"\033[38;2;%i;%i;%im\u2510",r,g,b);wrdisplay2(y+fgh,x+fgw,"\033[38;2;%i;%i;%im\u2518",r,g,b);
-for(int i =1;i<fgh;i++){wrdisplay2(y+i,x,"\u2502");wrdisplay2(y+i,x+fgw,"\u2502");};
-for(int ii =1;ii<fgw;ii++){wrdisplay2(y,x+ii,"\u2500");wrdisplay2(y+fgh,x+ii,"\u2500");};
+for(int i =1;i<fgh;i++){wrdisplay2(y+i,x,"\033[38;2;%i;%i;%im\u2502",r,g,b);wrdisplay2(y+i,x+fgw,"\033[38;2;%i;%i;%im\u2502",r,g,b);};
+for(int ii =1;ii<fgw;ii++){wrdisplay2(y,x+ii,"\033[38;2;%i;%i;%im\u2500",r,g,b);wrdisplay2(y+fgh,x+ii,"\033[38;2;%i;%i;%im\u2500",r,g,b);};
 
     for(int i =0;xy[i]!=-1;i+=2){
 int lx = xy[i+1], ly =xy[i];
