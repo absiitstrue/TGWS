@@ -12,3 +12,4 @@
 #include "../tool/pic.c"
 #include "../tool/tablr.c"
 #include "../tool/copy_mm.c"
+#include "../tool/line.c"

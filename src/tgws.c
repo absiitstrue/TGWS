@@ -21,7 +21,6 @@ static int fcl_palitra=0,nn=0,nnn=0;
 
 #define wrdisplay2(row, col, ...) \
     snprintf(display2[(row) * w + (col)], 64, __VA_ARGS__)
-
 #define wrdisplay1(row, col, ...) \
     snprintf(display1[(row) * w + (col)], 64, __VA_ARGS__)
 
@@ -30,11 +29,11 @@ static int fcl_palitra=0,nn=0,nnn=0;
 #include "./include/call_level2.c"
 
     int tgws_close_window(){printf("\033[?1049l");system("tput init");
-
+    
     exit(1);}
 
     uint64_t get_time_us(void) {
-    struct timespec ts;
+    struct timespec ts;             
     clock_gettime(CLOCK_MONOTONIC, &ts);
     return (uint64_t)ts.tv_sec * 1000000ULL + (uint64_t)(ts.tv_nsec / 1000);
 }
@@ -66,8 +65,6 @@ int tgws_draw_element(){
         mx = atomic_load(&mpx);
         my = atomic_load(&mpy);
         mbtn = atomic_load(&mbutton);
-        unsigned int current_kbp = atomic_load(&kbp);
-        unsigned int current_kbn = atomic_load(&kbn);
         unsigned int current_kbf = atomic_load(&kbf);
         unsigned int current_kbb = atomic_load(&kbb);
 
