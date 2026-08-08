@@ -10,6 +10,7 @@
 #include <signal.h>
 #include <pthread.h>
 #include <stdarg.h>
+#define export __attribute__((visibility("default")))
 
 int fore =0,pos =0, prx =-1,pry=-1;
 int h,w,mx,my,mbtn,fpsw=120,refp=0;
@@ -17,7 +18,7 @@ char (*display2)[64] = NULL;
 char (*display1)[64] = NULL;
 char *bufer = NULL;
 int bufersize,prew=-1;
-__attribute__((visibility("default"))) int fcl_palitra = 0;
+int fcl_palitra = 0;
 static int nn=0,nnn=0;
 
 #define wrdisplay2(row, col, ...) \

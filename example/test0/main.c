@@ -1,4 +1,4 @@
-#include "tgws.h"
+#include "../tgws.h"
 #include <stdio.h>
 #include <math.h>
 #include <time.h>

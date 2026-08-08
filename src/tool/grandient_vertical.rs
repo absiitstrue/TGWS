@@ -1,9 +1,3 @@
-#include <stdio.h>
-#include <sys/ioctl.h>
-#include <unistd.h>
-#include <math.h>
-#include <stdlib.h>
-
 int tgws_draw_vertical_gradient(int r1, int g1, int b1,
                              int r2, int g2, int b2,
                              int y, int x,
