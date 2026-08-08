@@ -17,8 +17,8 @@ char (*display2)[64] = NULL;
 char (*display1)[64] = NULL;
 char *bufer = NULL;
 int bufersize,prew=-1;
-
-static int fcl_palitra=0,nn=0,nnn=0;
+__attribute__((visibility("default"))) int fcl_palitra = 0;
+static int nn=0,nnn=0;
 
 #define wrdisplay2(row, col, ...) \
     snprintf(display2[(row) * w + (col)], 64, __VA_ARGS__)
@@ -32,9 +32,9 @@ void fwrdisplay2(int row, int col, const char *format, ...) {
     vsnprintf(display2[row * w + col], 64, format, args);
     va_end(args);
 }
-#include "./include/includetools.c"
-#include "./include/includesys.c"
-#include "./include/call_level2.c"
+#include "./include/includetools.rs"
+#include "./include/includesys.rs"
+#include "./include/call_level2.rs"
 
     int tgws_close_window(){printf("\033[?1049l");system("tput init");
    printf("\033[?25h"); 

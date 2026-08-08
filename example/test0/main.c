@@ -1,4 +1,8 @@
-#include "../../src/tgws.c"
+#include "tgws.h"
+#include <stdio.h>
+#include <math.h>
+#include <time.h>
+#include <stdlib.h>
 #define deg90 1.57
 
 
@@ -41,7 +45,7 @@ char form[30];
 
   colorss[0]=255;colorss[4]=255;;colorss[8]=255;
 
-    for(int i =0; i<=100000;i+=0){
+    for(int i =0; i<=100000;i++){
     time_t rawtime;
     time(&rawtime);
 
