@@ -13,3 +13,4 @@
 #include "../tool/tablr.rs"
 #include "../tool/copy_mm.rs"
 #include "../tool/line.rs"
+#include "../tool/graf.rs"

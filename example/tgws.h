@@ -23,7 +23,7 @@ int tgws_set_button_radio(int *b, int numb);
 int tgws_set_button_fix(int y, int x, int fgh, int fgw, int numb);
 
 // copy_mm.rs
-int copy_mm(int y ,int x,int fgh,int fgw,char b[][64]);
+int tgws_copy_mm(int y ,int x,int fgh,int fgw,char b[][64]);
 
 //grandient_cor_diagonal.rs
 int tgws_draw_corect_diagonal_grandient(int r1, int g1, int b1,int r2, int g2, int b2,int y, int x, int fgh, int fgw);
@@ -39,9 +39,12 @@ int tgws_draw_vertical_gradient(int r1, int g1, int b1,int r2, int g2, int b2,in
 
 //grandientx3.rs
 int tgws_draw_grandient_3color(int r1,int g1,int b1,int rc1,int gc1,int bc1,int rc2,int gc2,int bc2,int x,int y,int fgh,int fgw);
+int tgws_draw_grandient_line_to_color(int r,int g,int b, int colors[],int x, int y, int fgh,int fgw);
 
 //label.rs
 int tgws_print_label(int y, int x, char *str);
+int tgws_print_label_c16(int c,int y,int x, char *str);
+int tgws_print_label_c256(int c,int y,int x,char *str);
 
 // line.rs
 int tgws_draw_line_p(int r, int g, int b, int y0, int x0, int y1, int x1);
@@ -60,10 +63,13 @@ int tgws_draw_polzun_horisontal(int r, int g, int b, int max, int y, int x, int 
 int tgws_draw_square(int r1, int g1, int b1, int y, int x, int fgh, int fgw);
 
 // tablr.rs
-int tgws_draw_tablr(int r, int g, int b, int y, int x, int fgh, int fgw, int *xy);
+int tgws_draw_tablr_place(int r, int g, int b, int y, int x, int fgh, int fgw, int *xy);
+int tgws_draw_tablr_ofs(int rr,int r, int g, int b, int y, int x, int fgh, int fgw, int *cy, int *cx);
 
 // vertical_line.rs
 int tgws_draw_vertical_line(int rr, int r, int g, int b, int y, int x, int fgh, int fgw);
 
+//graf.rs
+int tgws_draw_grafic(int rg,int r,int g,int b,int y,int x, int fgh, int fgw);
 
 #endif // TGWS_H

@@ -1,4 +1,4 @@
-int copy_mm(int y ,int x,int fgh,int fgw,char b[][64]){
+int tgws_copy_mm(int y ,int x,int fgh,int fgw,char b[][64]){
 
     for(int i =0;i<fgh;i++){
         for(int ii =0;ii<fgw;ii++){

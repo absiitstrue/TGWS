@@ -67,6 +67,18 @@ int* tgws_call_palitra(int y, int x){
     sprintf(dt,"%-3iS",pls);tgws_print_label(y+28,x+16,dt);
     sprintf(dt,"%-3iV",plv);tgws_print_label(y+29,x+16,dt);
 
+    wrdisplay2(y,x+7,"\033[38;2;255;255;255m\u252C");
+    wrdisplay2(y+35,x+7,"\033[38;2;255;255;255m\u2534");
+    wrdisplay2(y,x+15,"\033[38;2;255;255;255m\u252C");
+    
+    wrdisplay2(y+23,x+62,"\033[38;2;255;255;255m\u2524");
+    wrdisplay2(y+23,x+15,"\033[38;2;255;255;255m\u251C");
+
+    wrdisplay2(y+35,x+15,"\033[38;2;255;255;255m\u2534");
+    
+    wrdisplay2(y+23,x+22,"\033[38;2;255;255;255m\u252C");
+    wrdisplay2(y+35,x+22,"\033[38;2;255;255;255m\u2534");
+
     tgws_draw_square(opr,opg,opb,y+30,x+16,4,5);
     tgws_draw_vertical_line(1, 255, 255, 255, y + 24, x + 22, 11, 1);
     

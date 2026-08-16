@@ -81,7 +81,7 @@ for(float i =0.00;i<=6.28;i+=houh){
 
       int borders[3];borders[2]=-1;
       borders[0]=3;borders[1]=74;
-    tgws_draw_tablr(colorss[15],colorss[16],colorss[17],3,7,34,78,borders);
+    tgws_draw_tablr_place(colorss[15],colorss[16],colorss[17],3,7,34,78,borders);
       tgws_print_label(4,75,"set symbol");
       //module open secund
 

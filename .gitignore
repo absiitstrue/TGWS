@@ -11,4 +11,4 @@ example/app
 *~
 .DS_Store
 .vscode/
-
+*.sp

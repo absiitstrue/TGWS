@@ -39,6 +39,7 @@ void fwrdisplay2(int row, int col, const char *format, ...) {
 
     int tgws_close_window(){printf("\033[?1049l");system("tput init");
    printf("\033[?25h"); 
+  free(display2);free(display1);free(bufer);
     exit(1);}
 
     uint64_t get_time_us(void) {
