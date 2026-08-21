@@ -73,7 +73,40 @@ void dr_page2(void){
 
 }
 //page 3
-    void dr_page3(void){
+int conf=0;
+int red=0;
+     int colors[13];
+  int pound[11];
+void dr_page3(void){
+
+  pound[10]=-1;colors[12]=-1;
+
+  sprintf(form,"its real config-- @/@1000 @/@100 @/@10 @/@1;conf=%03i",conf);
+tgws_print_label(42,12,form);
+
+int nn = tgws_set_button_classic(42,30,0,0);tgws_print_label(42,30,"+");if(nn==2)conf+=1000;
+    nn = tgws_set_button_classic(42,38,0,0);tgws_print_label(42,38,"+");if(nn==2)conf+=100;
+    nn = tgws_set_button_classic(42,45,0,0);tgws_print_label(42,45,"+");if(nn==2)conf+=10;
+    nn = tgws_set_button_classic(42,51,0,0);tgws_print_label(42,51,"+");if(nn==2)conf+=1;
+
+    nn = tgws_set_button_classic(42,32,0,0);tgws_print_label(42,32,"-");if(nn==2)conf-=1000;
+    nn = tgws_set_button_classic(42,40,0,0);tgws_print_label(42,40,"-");if(nn==2)conf-=100;
+    nn = tgws_set_button_classic(42,47,0,0);tgws_print_label(42,47,"-");if(nn==2)conf-=10;
+    nn = tgws_set_button_classic(42,53,0,0);tgws_print_label(42,53,"-");if(nn==2)conf-=1;
+
+  sprintf(form,"remove number in [] re--%i",red);
+  tgws_print_label(42,67,form);
+    nn = tgws_set_button_classic(42,93,0,0);tgws_print_label(42,93,"+/");if(nn==2)red++;
+    nn = tgws_set_button_classic(42,95,0,0);tgws_print_label(42,95,"-");if(nn==2)red--;
+
+  if(red<0)red=9;
+   if(red>9)red=0;
+
+
+    nn = tgws_set_button_classic(42,97,0,0);tgws_print_label(42,97,"+/");if(nn==2)pound[red]++;
+    nn = tgws_set_button_classic(42,99,0,0);tgws_print_label(42,99,"-");if(nn==2)pound[red]--;
+  
+  tgws_draw_grafic(conf,colors,pound,6,12,35,117);
 
     }
 //page 4
@@ -92,13 +125,38 @@ int main(int argc,char *argv[]){
   truecolor[12] = 0; truecolor[13] = 0; truecolor[14] = 255;
   truecolor[15] = 255; truecolor[16] = 0; truecolor[17] = 255;
 
-  int page =2,nn=0;
+  colors[1]=0;
+  colors[2]=0;
+  colors[3]=175;
+  colors[4]=0;
+  colors[5]=200;
+  colors[0]=255;
+  colors[6]=0;
+  colors[7]=200;
+  colors[8]=200;
+  colors[9]=0;
+  colors[10]=0;
+  colors[11]=255;
+
+  pound[0]=10;
+  pound[1]=12;
+  pound[2]=19;
+  pound[3]=8;
+  pound[4]=6;
+  pound[5]=10;
+  pound[6]=13;
+  pound[7]=18;
+  pound[8]=20;
+  pound[9]=19;
+
+
+  int page =3,nn=0;
   const char *spisok[]={
-    "TGWS",
-    "htop",
+    "I couldn't be bothered.",
+    "I couldn't be bothered.",
     "color",
     "statics",
-    "0"
+    "I couldn't be bothered."
   };
     while(1){
     int nn=0;

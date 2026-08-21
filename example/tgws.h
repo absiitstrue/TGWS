@@ -70,6 +70,6 @@ int tgws_draw_tablr_ofs(int rr,int r, int g, int b, int y, int x, int fgh, int f
 int tgws_draw_vertical_line(int rr, int r, int g, int b, int y, int x, int fgh, int fgw);
 
 //graf.rs
-int tgws_draw_grafic(int rg,int r,int g,int b,int y,int x, int fgh, int fgw);
+int tgws_draw_grafic(int rg,int colors[],int pound[],int y,int x, int fgh, int fgw);
 
 #endif // TGWS_H
