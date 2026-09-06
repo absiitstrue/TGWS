@@ -157,9 +157,9 @@ char *p= mass;
 void fwrdisplay2(int row, int col,char *world, int r,int g,int b,int fr,int fg,int fb ){
   if(h>(unsigned)(row)&&w>(unsigned)(col))fastsnprintf(display2[(row) * w + (col)],r,g,b,fr,fg,fb,world);}
 
-#include "./include/includetools.rs"
-#include "./include/includesys.rs"
-#include "./include/call_level2.rs"
+#include "./include/includetools.c"
+#include "./include/includesys.c"
+#include "./include/call_level2.c"
 
     int tgws_close_window(){printf("\033[?1049l");system("tput init");
    printf("\033[?25h"); 
