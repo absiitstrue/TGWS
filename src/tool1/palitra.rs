@@ -40,7 +40,7 @@ void rgb_to_hsv(){
 int* tgws_call_palitra(int y, int x){
     fcl_palitra =1;
     rret=1;
-    for(int m =0;m<=36;m++){for(int mm=0;mm<=63;mm++){wrdisplay2(y+m,x+mm," ");};};
+    for(int m =0;m<=36;m++){for(int mm=0;mm<=63;mm++){fastwrdisplay2w(y+m,x+mm," ");};};
     int rgbcr= tgws_draw_polzun_vertical(255, 0, 0, 255, y + 2, x + 1,32, 1, 0, opr);
     int rgbcg= tgws_draw_polzun_vertical(0, 255, 0, 255, y + 2, x + 3,32, 1, 1, opg);
     int rgbcb= tgws_draw_polzun_vertical(0, 0, 255, 255, y + 2, x + 5,32, 1, 2, opb);
@@ -48,11 +48,11 @@ int* tgws_call_palitra(int y, int x){
     int hsvs = tgws_draw_polzun_vertical(255, 255, 255, 100, y + 2, x + 10,32, 1, 4, pls);
     int hsvv = tgws_draw_polzun_vertical(150, 150, 150, 100, y + 2, x + 12,32, 1, 5, plv);
     
-    tgws_print_label(y+34,x+49,"[OK]");
-    tgws_print_label(y+34,x+55,"[CLOSE]");
+    tgws_print_label_fc(y+34,x+49,"[OK]",255,255,255,0,0,0);
+    tgws_print_label_fc(y+34,x+55,"[CLOSE]",255,255,255,0,0,0);
     nnn=tgws_set_button_classic(y+34,x+49,1,4); if(nnn==2){fcl_palitra=0;nnn=0;rret=0;};
     nnn=tgws_set_button_classic(y+34,x+55,1,7); if(nnn==2){fcl_palitra=0;nnn=0;rret=1;};
-    tgws_print_label(y + 1, x + 1, "R G B |H S V");
+    tgws_print_label_fc(y + 1, x + 1, "R G B |H S V",255,255,255,0,0,0);
     tgws_draw_grandient_3color(opr, opg, opb, 255, 255, 255, 0, 0, 0, y + 1, x + 17, 45, 45);
     tgws_draw_border(1, 255, 255, 255, y, x + 15,35, 47);
     tgws_draw_border(1, 255, 255, 255, y + 23, x + 15, 12, 47);
@@ -60,24 +60,25 @@ int* tgws_call_palitra(int y, int x){
     tgws_draw_border(1, 255, 255, 255, y, x,35, 62);
 
     char dt[20]={0};
-    sprintf(dt,"%-3iR",opr);tgws_print_label(y+24,x+16,dt);
-    sprintf(dt,"%-3iG",opg);tgws_print_label(y+25,x+16,dt);
-    sprintf(dt,"%-3iB",opb);tgws_print_label(y+26,x+16,dt);
-    sprintf(dt,"%-3iH",plh);tgws_print_label(y+27,x+16,dt);
-    sprintf(dt,"%-3iS",pls);tgws_print_label(y+28,x+16,dt);
-    sprintf(dt,"%-3iV",plv);tgws_print_label(y+29,x+16,dt);
+    sprintf(dt,"%-3iR",opr);tgws_print_label_fc(y+24,x+16,dt,255,255,255,0,0,0);
+    sprintf(dt,"%-3iG",opg);tgws_print_label_fc(y+25,x+16,dt,255,255,255,0,0,0);
+    sprintf(dt,"%-3iB",opb);tgws_print_label_fc(y+26,x+16,dt,255,255,255,0,0,0);
+    sprintf(dt,"%-3iH",plh);tgws_print_label_fc(y+27,x+16,dt,255,255,255,0,0,0);
+    sprintf(dt,"%-3iS",pls);tgws_print_label_fc(y+28,x+16,dt,255,255,255,0,0,0);
+    sprintf(dt,"%-3iV",plv);tgws_print_label_fc(y+29,x+16,dt,255,255,255,0,0,0);
 
-    wrdisplay2(y,x+7,"\033[38;2;255;255;255m\u252C");
-    wrdisplay2(y+35,x+7,"\033[38;2;255;255;255m\u2534");
-    wrdisplay2(y,x+15,"\033[38;2;255;255;255m\u252C");
-    
-    wrdisplay2(y+23,x+62,"\033[38;2;255;255;255m\u2524");
-    wrdisplay2(y+23,x+15,"\033[38;2;255;255;255m\u251C");
 
-    wrdisplay2(y+35,x+15,"\033[38;2;255;255;255m\u2534");
+    fastwrdisplay2w(y,x+7,"\u252C");
+    fastwrdisplay2w(y+35,x+7,"\u2534");
+    fastwrdisplay2w(y,x+15,"\u252C");
     
-    wrdisplay2(y+23,x+22,"\033[38;2;255;255;255m\u252C");
-    wrdisplay2(y+35,x+22,"\033[38;2;255;255;255m\u2534");
+    fastwrdisplay2w(y+23,x+62,"\u2524");
+    fastwrdisplay2w(y+23,x+15,"\u251C");
+
+    fastwrdisplay2w(y+35,x+15,"\u2534");
+    
+    fastwrdisplay2w(y+23,x+22,"\u252C");
+    fastwrdisplay2w(y+35,x+22,"\u2534");
 
     tgws_draw_square(opr,opg,opb,y+30,x+16,4,5);
     tgws_draw_vertical_line(1, 255, 255, 255, y + 24, x + 22, 11, 1);

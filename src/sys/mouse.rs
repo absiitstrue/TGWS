@@ -1,4 +1,12 @@
-// Sorry, but I am not a professional, this file is AI slop.
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <termios.h>
+#include <pthread.h>
+#include <signal.h>
+#include <stdatomic.h>
+#include <sys/select.h>
+#include <sys/time.h>
 
 #define KEY_ESC       27
 #define KEY_UP        256
@@ -33,19 +41,24 @@ atomic_uint kbp = 0;
 atomic_uint kbb = 0; 
 atomic_uint kbf = 0; 
 
+// Имена переменных возвращены в исходный вид для совместимости с tgws.c и button.rs
 atomic_int mbutton = 0;
-atomic_int mpx = 0;
-atomic_int mpy = 0;
+atomic_int mpx     = 0;
+atomic_int mpy     = 0;
 
-static volatile atomic_int io_running = 1;
+static atomic_int io_running = 1;
 static struct termios orig_termios;
+static atomic_int is_cleaned_up = 0;
 
-#define mouse_enable()  printf("\033[?1003h")
-#define mouse_disable() printf("\033[?1003l")
+#define mouse_enable()  do { printf("\033[?1003h"); fflush(stdout); } while(0)
+#define mouse_disable() do { printf("\033[?1003l"); fflush(stdout); } while(0)
 
 static void cleanup_io(void) {
-    mouse_disable();
-    tcsetattr(STDIN_FILENO, TCSANOW, &orig_termios);
+    int expected = 0;
+    if (atomic_compare_exchange_strong(&is_cleaned_up, &expected, 1)) {
+        mouse_disable();
+        tcsetattr(STDIN_FILENO, TCSANOW, &orig_termios);
+    }
 }
 
 static void signal_handler(int sig) {
@@ -65,7 +78,6 @@ static void* unified_input_thread(void* arg) {
     tcsetattr(STDIN_FILENO, TCSANOW, &raw);
     
     mouse_enable();
-    setbuf(stdout, NULL);
 
     unsigned char buf[32];
     
@@ -79,10 +91,21 @@ static void* unified_input_thread(void* arg) {
         
         if (rv > 0) {
             ssize_t n = read(STDIN_FILENO, buf, sizeof(buf));
-            if (n <= 0) continue;
+            if (n == 0) {
+                break;
+            }
+            if (n < 0) {
+                continue;
+            }
 
             if (n >= 6 && buf[0] == '\e' && buf[1] == '[' && buf[2] == 'M') {
-                atomic_store(&mbutton, (int)buf[3] - 32);
+                int raw_btn = (int)buf[3] - 32;
+                
+                int clean_btn = raw_btn & ~(4 | 8 | 16);
+
+                if((int)buf[3]==35)clean_btn=100;
+
+                atomic_store(&mbutton, clean_btn);
                 atomic_store(&mpx,     (int)buf[4] - 33);
                 atomic_store(&mpy,     (int)buf[5] - 33);
             } 
@@ -168,8 +191,6 @@ static void* unified_input_thread(void* arg) {
                     atomic_store(&kbp, 1);
                 }
             }
-        } else if (rv == 0) {
-            atomic_store(&kbp, 0);
         }
     }
     
@@ -178,6 +199,8 @@ static void* unified_input_thread(void* arg) {
 }
 
 void start_io(void) {
+    atexit(cleanup_io);
+    
     signal(SIGINT, signal_handler);
     signal(SIGTERM, signal_handler);
     

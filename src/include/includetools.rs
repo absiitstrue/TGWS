@@ -11,6 +11,5 @@
 #include "../tool/vertical_line.rs"
 #include "../tool/pic.rs"
 #include "../tool/tablr.rs"
-#include "../tool/copy_mm.rs"
 #include "../tool/line.rs"
 #include "../tool/graf.rs"

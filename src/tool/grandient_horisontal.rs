@@ -6,8 +6,8 @@ int tgws_draw_horisontal_gradient(int r1, int g1, int b1,
     int dr = 0, dg = 0, db = 0;
     float shr = 0, shg = 0, shb = 0;
     if (fgh>h || fgw>w){printf("Error uncorect size.\n      |height| width |\n have | %i   | %i   |\n your | %i  | %i   |\n",h,w,fgh,fgw); return 1;}
-    if (fgh ==-1){fgh = h*2;};// max
-    if (fgw ==-1){fgw = w;};
+    if (fgh ==-1){fgh = h*2-y*2;};// max
+    if (fgw ==-1){fgw = w-x;};
 
     dr = -(r1 - r2);
     dg = -(g1 - g2);
@@ -25,10 +25,7 @@ int tgws_draw_horisontal_gradient(int r1, int g1, int b1,
         int b= round((float)b1+shb*cw);
         int ox = x + ch;
         int oy = y + cw;
-        wrdisplay2(ox,oy,"\033[38;2;%i;%i;%im\u2588"
-        ,r
-        ,g
-        ,b    );
+        fastwrdisplay2c(ox,oy,"\u2588",r,g,b    );
 };cw = 0;};
     return 0;
 }

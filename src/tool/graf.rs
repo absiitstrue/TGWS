@@ -3,8 +3,8 @@ int tgws_draw_grafic(int rg,int colors[],int pounds[],int y,int x, int fgh, int 
 
     for(int gy=y;gy<y+fgh;gy++){
         for(int gx=x;gx<x+fgw;gx++){
-            if(r100==3||r100==4) wrdisplay2(gy,gx,".");
-            else wrdisplay2(gy,gx," ");
+            if(r100==3||r100==4) fastwrdisplay2w(gy,gx,".");
+            else fastwrdisplay2w(gy,gx," ");
         }
     }
 
@@ -26,8 +26,8 @@ int tgws_draw_grafic(int rg,int colors[],int pounds[],int y,int x, int fgh, int 
             int val=minp+(int)((maxp-minp)*(float)s/steps);
             int ly=y+fgh-2-(int)((vis-1)*(float)s/steps);
             if(ly>=y&&ly<y+fgh){
-                char buf[16]; snprintf(buf,sizeof(buf),"%d-",val);
-                for(int k=0;buf[k];k++){if(x+k<x+fgw) wrdisplay2(ly,x+k,"%c",buf[k]);};
+                char buf[16]; char *p = itoa(buf,val); *p++='-'; *p='\0';
+                for(int k=0;buf[k];k++){if(x+k<x+fgw){char bff[2]={buf[k],'\0'}; fastwrdisplay2w(ly,x+k,bff);}};
             };
         };
     }
@@ -37,7 +37,7 @@ int tgws_draw_grafic(int rg,int colors[],int pounds[],int y,int x, int fgh, int 
             int norm=(int)(((pounds[i]-minp)*(float)(vis-1))/delt);
             if(r10==6){int norm8=(int)(((pounds[i]-minp)*(float)(vis-1)*8.0)/delt); norm=norm8/8;};
             int ely=y+fgh-2-norm; int elx_start=x+off_x+(int)(i*shag);
-            for(int dx=x+off_x;dx<elx_start;dx++){if(dx<x+fgw) wrdisplay2(ely,dx,".");};
+            for(int dx=x+off_x;dx<elx_start;dx++){if(dx<x+fgw) fastwrdisplay2w(ely,dx,".");};
         };
     }
 
@@ -56,17 +56,17 @@ int tgws_draw_grafic(int rg,int colors[],int pounds[],int y,int x, int fgh, int 
         if(elx_end>x+fgw) elx_end=x+fgw;
 
         for(int elx=elx_start;elx<elx_end;elx++){
-            if(r10==1||r10==2){wrdisplay2(y+fgh-1,elx,"^");}
-            if(r10==1||r10==3){if(target_ely-1>=y) wrdisplay2(target_ely-1,elx,"v");}
+            if(r10==1||r10==2){fastwrdisplay2w(y+fgh-1,elx,"^");}
+            if(r10==1||r10==3){if(target_ely-1>=y) fastwrdisplay2w(target_ely-1,elx,"v");}
             if(r10==4 && elx==elx_start){
                 if(target_ely-1>=y){
-                    char buf[16]; snprintf(buf,sizeof(buf),"%d",pounds[i]);
-                    for(int k=0;buf[k];k++){if(elx+k<x+fgw) wrdisplay2(target_ely-1,elx+k,"%c",buf[k]);};
+                    char buf[16]; itoa(buf,pounds[i]);
+                    for(int k=0;buf[k];k++){if(elx+k<x+fgw){char bff[2]={buf[k],'\0'}; fastwrdisplay2w(target_ely-1,elx+k,bff);};}
                 }
             }
             if(r10==5 && elx==elx_start){
-                char buf[16]; snprintf(buf,sizeof(buf),"%d",pounds[i]);
-                for(int k=0;buf[k];k++){if(elx+k<x+fgw) wrdisplay2(y+fgh-1,elx+k,"%c",buf[k]);};
+                char buf[16]; itoa(buf,pounds[i]);
+                for(int k=0;buf[k];k++){if(elx+k<x+fgw){char bff[2]={buf[k],'\0'}; fastwrdisplay2w(y+fgh-1,elx+k,bff);}};
             }
 
             int sy,ey;
@@ -102,7 +102,7 @@ int tgws_draw_grafic(int rg,int colors[],int pounds[],int y,int x, int fgh, int 
                     else if(suby==4) sym="\u2585"; else if(suby==5) sym="\u2586";
                     else if(suby==6) sym="\u2587"; else if(suby==7) sym="\u2588";
                 }
-                wrdisplay2(cy,elx,"\033[38;2;%d;%d;%dm%s\033[0m",r,g,b,sym);
+                fastwrdisplay2c(cy,elx,sym,r,g,b);
             }
         }
     }

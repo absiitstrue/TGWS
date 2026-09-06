@@ -5,9 +5,9 @@ int tgws_draw_corect_diagonal_grandient(int r1, int g1, int b1,
 
     int dr = 0, dg = 0, db = 0;
     float shr = 0, shg = 0, shb = 0;
-    if (fgh>h*2 || fgw>w){printf("Error uncorect size.\n      |height| width |\n have | %i   | %i   |\n your | %i  | %i   |\n",h,w,fgh,fgw); return 1;}
-    if (fgh ==-1){fgh = h*2;};// max
-    if (fgw ==-1){fgw = w;};
+    if (fgh>h*2 || fgw>w){printf("Error uncorect size.\n      |height| width |\n have | %i   | %i   |\n your | %i  | %i   |\n",h,w,fgh,fgw); exit(1);}
+    if (fgh ==-1){fgh = h*2-y*2;};// max
+    if (fgw ==-1){fgw = w-x;};
 
     dr = -(r1 - r2);
     dg = -(g1 - g2);
@@ -31,13 +31,7 @@ int tgws_draw_corect_diagonal_grandient(int r1, int g1, int b1,
         int ox = x + ch/2;
         int oy = y + cw;
 
-        wrdisplay2(ox,oy,"\033[38;2;%i;%i;%im\033[48;2;%i;%i;%im\u2580"
-        ,r
-        ,g
-        ,b
-        ,rt
-        ,gt
-        ,bt    );
+        fastwrdisplay2(ox,oy,"\u2580",r,g,b,rt,gt,bt);
 };cw = 0;};
     return 0;
 }

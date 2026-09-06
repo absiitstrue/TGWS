@@ -7,7 +7,7 @@ int tgws_draw_line_p(int r,int g,int b,int y0,int x0, int y1, int x1){
 
   int err = dx-dy,e2;
   while (1) {
-    wrdisplay2(y0,x0,"\033[38;2;%i;%i;%im\u2588",r,g,b);
+    fastwrdisplay2c(y0,x0,"\u2588",r,g,b);
     if(x0==x1&&y0==y1)break;
       e2 =2*err;
       if(e2>=-dy){err -=dy;x0 +=sx;}
@@ -32,13 +32,13 @@ int tgws_draw_line_m(int r,int g, int b,int y0,int x0,int y1, int x1){
   while (1) {
 
     if((pz+1==y0||pz-1==y0)&&pzx == x0){
-     wrdisplay2(y0/2,x0,"\033[38;2;%i;%i;%im\u2588",r,g,b);
+     fastwrdisplay2c(y0/2,x0,"\u2588",r,g,b);
 
     }
     else if(!(y0%2)){
-      wrdisplay2(y0/2,x0,"\033[38;2;%i;%i;%im\u2580",r,g,b);
+      fastwrdisplay2c(y0/2,x0,"\u2580",r,g,b);
     }
-    else {wrdisplay2(y0/2,x0,"\033[38;2;%i;%i;%im\u2584",r,g,b);}
+    else {fastwrdisplay2c(y0/2,x0,"\u2584",r,g,b);}
   pz = y0;pzx = x0;
     if(x0==x1&&y0==y1)break;
       e2 =2*err;
@@ -58,7 +58,7 @@ int tgws_draw_line_p_char(int r,int g,int b,int y0,int x0, int y1, int x1, char 
 
   int err = dx-dy,e2;
   while (1) {
-    wrdisplay2(y0,x0,"\033[38;2;%i;%i;%im%s",r,g,b,mch);
+    fastwrdisplay2c(y0,x0,mch,r,g,b);
     if(x0==x1&&y0==y1)break;
       e2 =2*err;
       if(e2>=-dy){err -=dy;x0 +=sx;}
@@ -83,13 +83,13 @@ int tgws_draw_line_m_char(int r,int g, int b,int y0,int x0,int y1, int x1,char *
   while (1) {
 
     if((pz+1==y0||pz-1==y0)&&pzx == x0){
-     wrdisplay2(y0/2,x0,"\033[38;2;%i;%i;%im%s",r,g,b,mch);
+     fastwrdisplay2c(y0/2,x0,mch,r,g,b);
 
     }
     else if(!(y0%2)){
-      wrdisplay2(y0/2,x0,"\033[38;2;%i;%i;%im%s",r,g,b,mch);
+      fastwrdisplay2c(y0/2,x0,mch,r,g,b);
     }
-    else {wrdisplay2(y0/2,x0,"\033[38;2;%i;%i;%im%s",r,g,b,mch);}
+    else {fastwrdisplay2c(y0/2,x0,mch,r,g,b);}
   pz = y0;pzx = x0;
     if(x0==x1&&y0==y1)break;
       e2 =2*err;

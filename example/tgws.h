@@ -3,14 +3,19 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdatomic.h>
 //tgws.c
 int tgws_close_window(void);
 uint64_t get_time_us(void);
 int tgws_init_window(int argc, char *argv[]);
 int tgws_draw_element(void);
 extern int fcl_palitra;
-void fwrdisplay2(int row, int col, const char *format, ...);
-
+void fwrdisplay2(int y,int x, char *world,int r,int g,int b,int fr, int fg,int fb);
+extern atomic_uint kbb;extern atomic_uint kbp;
+extern atomic_uint mx;
+extern atomic_uint my;
+extern atomic_uint mbtn;
+extern int refp;
 //palitra.rs 
 int* tgws_call_palitra(int y, int x);
 
@@ -42,9 +47,25 @@ int tgws_draw_grandient_3color(int r1,int g1,int b1,int rc1,int gc1,int bc1,int 
 int tgws_draw_grandient_line_to_color(int r,int g,int b, int colors[],int x, int y, int fgh,int fgw);
 
 //label.rs
-int tgws_print_label(int y, int x, char *str);
-int tgws_print_label_c16(int c,int y,int x, char *str);
-int tgws_print_label_c256(int c,int y,int x,char *str);
+//int tgws_print_label_c16(int c,int y,int x, char *str);
+//int tgws_print_label_c256(int c,int y,int x,char *str);
+
+//int tgws_print_label_f(int y, int x, char *str,int fr,int fg, int fb);
+//int tgws_print_label_c(int y, int x, char *str,int r,int g, int b);
+int tgws_print_label_fc(int y, int x, char *str,int r,int g, int b,int fr, int fg,int fb);
+#define tgws_print_label(y,x,str)\
+        tgws_print_label_fc(y,x,str,255,255,255,0,0,0)
+#define tgws_print_label_c(y,x,str,r,g,b)\
+        tgws_print_label_fc(y,x,str,r,g,b,0,0,0)
+#define tgws_print_label_f(y,x,str,fr,fg,fb)\
+        tgws_print_label_fc(y,x,str,255,255,255,fr,fg,fb)
+int tgws_print_txt_fc(int y, int x, char *str,int r,int g, int b,int fr, int fg,int fb);
+#define tgws_print_txt(y,x,str)\
+        tgws_print_txt_fc(y,x,str,255,255,255,0,0,0)
+#define tgws_print_txt_c(y,x,str,r,g,b)\
+        tgws_print_txt_fc(y,x,str,r,g,b,0,0,0)
+#define tgws_print_txt_f(y,x,str,fr,fg,fb)\
+        tgws_print_txt_fc(y,x,str,255,255,255,fr,fg,fb)
 
 // line.rs
 int tgws_draw_line_p(int r, int g, int b, int y0, int x0, int y1, int x1);

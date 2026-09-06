@@ -57,15 +57,15 @@ char form[30];
 for(float i =0.00;i<=6.28;i+=sech){
       sy = roundf(sin(i)*32+40);
       sx = roundf(cos(i)*32+40);
-      if(!(sy%2==0))fwrdisplay2(sy/2,sx,"\033[38;2;%i;%i;%im\u2804",colorss[9],colorss[10],colorss[11]);
-      else fwrdisplay2(sy/2,sx,"\033[38;2;%i;%i;%im\u2802",colorss[9],colorss[10],colorss[11]);
+      if(!(sy%2==0))fwrdisplay2(sy/2,sx,"\u2804",colorss[9],colorss[10],colorss[11],0,0,0);
+      else fwrdisplay2(sy/2,sx,"\u2802",colorss[9],colorss[10],colorss[11],0,0,0);
     }
     
 for(float i =0.00;i<=6.28;i+=houh){
       sy = roundf(sin(i)*32+40);
       sx = roundf(cos(i)*32+40);
-      if(!(sy%2==0))fwrdisplay2(sy/2,sx,"\033[38;2;%i;%i;%im\u2584",colorss[12],colorss[13],colorss[14]);
-      else fwrdisplay2(sy/2,sx,"\033[38;2;%i;%i;%im\u2580",colorss[12],colorss[13],colorss[14]);
+      if(!(sy%2==0))fwrdisplay2(sy/2,sx,"\u2584",colorss[12],colorss[13],colorss[14],0,0,0);
+     else fwrdisplay2(sy/2,sx,"\u2580",colorss[12],colorss[13],colorss[14],0,0,0);
     }
     nn = tgws_set_button_fix(4,62,0,10,0);
 
@@ -159,9 +159,9 @@ for(float i =0.00;i<=6.28;i+=houh){
       //close color
     }
     
-unicode_to_utf8(sumblhou,form);sy = (int)(sin(houh*hour-deg90)*8)+20;sx = (int)(cos(hour*houh-deg90)*16)+40;tgws_draw_line_m_char(colorss[0],colorss[1],colorss[2],20,40,sy,sx,form);// hour
-unicode_to_utf8(sumblmin,form);sy = (int)(sin(sech*minu-deg90)*12)+20;sx = (int)(cos(sech*minu-deg90)*24)+40;tgws_draw_line_m_char(colorss[3],colorss[4],colorss[5],20,40,sy,sx,form);// minut
-unicode_to_utf8(sumblsec,form);sy = (int)(sin(sech*secu-deg90)*15)+20;sx = (int)(cos(sech*secu-deg90)*30)+40;tgws_draw_line_m_char(colorss[6],colorss[7],colorss[8],20,40,sy,sx,form);// secunds
+unicode_to_utf8(sumblhou,form);sy = (int)(sinf(houh*hour-deg90)* 8)+20;sx = (int)(cosf(hour*houh-deg90)*16)+40;tgws_draw_line_m_char(colorss[0],colorss[1],colorss[2],20,40,sy,sx,form);// hour
+unicode_to_utf8(sumblmin,form);sy = (int)(sinf(sech*minu-deg90)*12)+20;sx = (int)(cosf(sech*minu-deg90)*24)+40;tgws_draw_line_m_char(colorss[3],colorss[4],colorss[5],20,40,sy,sx,form);// minut
+unicode_to_utf8(sumblsec,form);sy = (int)(sinf(sech*secu-deg90)*15)+20;sx = (int)(cosf(sech*secu-deg90)*30)+40;tgws_draw_line_m_char(colorss[6],colorss[7],colorss[8],20,40,sy,sx,form);// secunds
         tgws_draw_element();
     }
 tgws_close_window();

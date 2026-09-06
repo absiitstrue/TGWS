@@ -11,8 +11,8 @@ if(mx>=x && my>=y && mx<=fgw+x && my<=y+fgh&&(mbtn == 32||mbtn==0)){sp[numb] = r
 else if(inint !=-1&&inint !=sp[numb+200]){sp[numb+100]=(y+fgh)-round(inint/sh);sp[numb]=inint;sp[numb+200]=inint;};
 int xx = (x+x+fgw)/2;
 tgws_draw_square(r,g,b,sp[numb+100],x,fgh-(sp[numb+100]-y),fgw);
-wrdisplay2(y,xx,"\033[0m^");
-wrdisplay2(y+fgh,xx,"\033[0mv");
+fastwrdisplay2w(y,xx,"^");
+fastwrdisplay2w(y+fgh,xx,"v");
 return sp[numb];};
 
 
@@ -32,6 +32,6 @@ else if(inint !=-1&&inint !=sp1[numb+200]){sp1[numb+100]=x+round(inint/sh);sp1[n
 int yy = (y+y+fgh)/2;
 
 tgws_draw_square(r,g,b,y,x,fgh,(sp1[numb+100]-x));
-wrdisplay2(yy,x,"\033[0m>");
-wrdisplay2(yy,fgw+x,"\033[0m<");
+fastwrdisplay2w(yy,x,">");
+fastwrdisplay2w(yy,fgw+x,"<");
 return sp1[numb];};

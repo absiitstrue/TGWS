@@ -1,6 +1,6 @@
 int tgws_draw_grandient_3color(int r1,int g1,int b1,int rc1,int gc1,int bc1,int rc2,int gc2,int bc2,int x,int y,int fgh,int fgw){
 if(fgh/2>h||fgw>w){printf("Error uncorect size.\n");return 1;}
-if(fgh==-1){fgh=h*2;};if(fgw==-1){fgw=w;};
+if(fgh==-1){fgh=h*2-y*2;};if(fgw==-1){fgw=w-x;};
 float dt2[fgw*3+10];memset(dt2,0,sizeof(dt2));
 
 float shr=(float)(rc1-r1)/(fgw>1?fgw-1:1);
@@ -24,7 +24,7 @@ float b=(float)b1+shb*cw+dt2[cw+fgw*2]*ch;int b2=round(b);int bh=round(b+dt2[cw+
 
 
 int ox=x+ch/2;int oy=y+cw;
-wrdisplay2(ox,oy,"\033[38;2;%i;%i;%im\033[48;2;%i;%i;%im\u2580\033[0m"
+fastwrdisplay2(ox,oy,"\u2580"
     ,r2,g2,b2,rh,gh,bh);
 };
 };
@@ -33,7 +33,7 @@ return 0;
 
 int tgws_draw_grandient_line_to_color(int r1,int g1,int b1,int colors[],int x,int y,int fgh,int fgw){
 if(fgh/2>h||fgw>w){printf("Error uncorect size.\n");return 1;}
-if(fgh==-1){fgh=h*2;};if(fgw==-1){fgw=w;};
+if(fgh==-1){fgh=h*2-y*2;};if(fgw==-1){fgw=w-x;};
 
 int siz=0;
 for(;colors[siz]!=-1;siz++){}siz++;
@@ -74,7 +74,7 @@ int gh = linegrand[cw*3+1]+shv[cw*3+1]*(ch+1);
 int bh = linegrand[cw*3+2]+shv[cw*3+2]*(ch+1);
 
 int ox=x+ch/2;int oy=y+cw;
-wrdisplay2(ox,oy,"\033[38;2;%i;%i;%im\033[48;2;%i;%i;%im\u2580\033[0m"
+fastwrdisplay2(ox,oy,"\u2580"
     ,r2,g2,b2,rh,gh,bh);
 };
 };
