@@ -30,28 +30,28 @@ int tgws_set_button_fix(int y, int x, int fgh, int fgw, int numb);
 // copy_mm.rs
 int tgws_copy_mm(int y ,int x,int fgh,int fgw,char b[][64]);
 
-//grandient_cor_diagonal.rs
-int tgws_draw_corect_diagonal_grandient(int r1, int g1, int b1,int r2, int g2, int b2,int y, int x, int fgh, int fgw);
+//grandient_multi.c
+int tgws_draw_gradient_super(int mode, int r1, int g1, int b1, int r2, int g2, int b2, int r3, int g3, int b3, int x, int y, int fgh, int fgw, int *colors);
 
-//grandient_horisontal.rs
-int tgws_draw_horisontal_gradient(int r1, int g1, int b1,int r2, int g2, int b2,int y, int x,int fgh, int fgw);
+#define tgws_draw_vertical_gradient(r1,g1,b1,r2,g2,b2,y,x,fgh,fgw) \
+    tgws_draw_gradient_super(-1,r1,g1,b1,r1,g1,b1,r2,g2,b2,y,x,fgh,fgw,NULL)
 
-//grandient_unc_diagonal.rs
-int tgws_draw_ucorect_diagonal_grandient(int r1, int g1, int b1,int r2, int g2, int b2,int y, int x,int fgh, int fgw);
+#define tgws_draw_horisontal_gradient(r1,g1,b1,r2,g2,b2,y,x,fgh,fgw) \
+    tgws_draw_gradient_super(-1,r1,g1,b1,r2,g2,b2,r1,g1,b1,y,x,fgh,fgw,NULL)
 
-//grandient_vertical.rs
-int tgws_draw_vertical_gradient(int r1, int g1, int b1,int r2, int g2, int b2,int y, int x,int fgh, int fgw);
+#define tgws_draw_gradient_with_angle(r1,g1,b1,r2,g2,b2,angle,y,x,fgh,fgw) \
+    tgws_draw_gradient_super(angle,r1,g1,b1,r2,g2,b2,r2,g2,b2,y,x,fgh,fgw,NULL)
 
-//grandientx3.rs
-int tgws_draw_grandient_3color(int r1,int g1,int b1,int rc1,int gc1,int bc1,int rc2,int gc2,int bc2,int x,int y,int fgh,int fgw);
-int tgws_draw_grandient_line_to_color(int r,int g,int b, int colors[],int x, int y, int fgh,int fgw);
+#define tgws_draw_grandient_3color(r1,g1,b1,rc1,gc1,bc1,rc2,gc2,bc2,x,y,fgh,fgw) \
+    tgws_draw_gradient_super(-2,r1,g1,b1,rc1,gc1,bc1,rc2,gc2,bc2,x,y,fgh,fgw,NULL)
 
-//label.rs
-//int tgws_print_label_c16(int c,int y,int x, char *str);
-//int tgws_print_label_c256(int c,int y,int x,char *str);
+#define tgws_draw_grandient_3c_auto(r1,g1,b1,r2,g2,b2,r3,g3,b3,x,y,fgh,fgw) \
+    tgws_draw_gradient_super(-1,r1,g1,b1,r2,g2,b2,r3,g3,b3,x,y,fgh,fgw,NULL)
 
-//int tgws_print_label_f(int y, int x, char *str,int fr,int fg, int fb);
-//int tgws_print_label_c(int y, int x, char *str,int r,int g, int b);
+#define tgws_draw_grandient_line_to_color(r1,g1,b1,colors,x,y,fgh,fgw) \
+    tgws_draw_gradient_super(-5,r1,g1,b1,0,0,0,0,0,0,x,y,fgh,fgw,colors)
+
+//label.c
 int tgws_print_label_fc(int y, int x, char *str,int r,int g, int b,int fr, int fg,int fb);
 #define tgws_print_label(y,x,str)\
         tgws_print_label_fc(y,x,str,255,255,255,0,0,0)

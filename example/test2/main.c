@@ -20,7 +20,7 @@ static int truecolor[22];
 void dr_page2(void){
   for(int i=0;i<16;i++){
     sprintf(form,"color=%i",i);
-    tgws_print_label_c16(i,8+i,13,form);
+  //  tgws_print_label_c16(i,8+i,13,form);
     }
   tgws_draw_border(2,255,255,255,6,12,18,13);
   tgws_print_label(7,16,"16 bit");
@@ -30,8 +30,8 @@ void dr_page2(void){
     int row = i/16;
     int col = i%16;
     sprintf(form,"\033[38;5;%im\u2588",i);
-    fwrdisplay2(8+row,29+col*2,form);
-    fwrdisplay2(8+row,29+col*2+1,form);
+    //fwrdisplay2(8+row,29+col*2,form);
+    //fwrdisplay2(8+row,29+col*2+1,form);
   }
   tgws_draw_border(2,255,255,255,6,28,18,34);
   tgws_print_label(7,37,"256 bit color");

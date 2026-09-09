@@ -53,7 +53,7 @@ int* tgws_call_palitra(int y, int x){
     nnn=tgws_set_button_classic(y+34,x+49,1,4); if(nnn==2){fcl_palitra=0;nnn=0;rret=0;};
     nnn=tgws_set_button_classic(y+34,x+55,1,7); if(nnn==2){fcl_palitra=0;nnn=0;rret=1;};
     tgws_print_label_fc(y + 1, x + 1, "R G B |H S V",255,255,255,0,0,0);
-    tgws_draw_grandient_3color(opr, opg, opb, 255, 255, 255, 0, 0, 0, y + 1, x + 17, 45, 45);
+    tgws_draw_gradient_super(-2,opr, opg, opb, 255, 255, 255, 0, 0, 0, y + 1, x + 17, 45, 45, NULL);
     tgws_draw_border(1, 255, 255, 255, y, x + 15,35, 47);
     tgws_draw_border(1, 255, 255, 255, y + 23, x + 15, 12, 47);
     tgws_draw_vertical_line(1, 255, 255, 255, y + 1, x + 7,34, 1);

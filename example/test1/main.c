@@ -774,7 +774,7 @@ int main(int argc, char *argv[]) {
     while(1) {
         switch(page) {
             case 1:
-                if(restgame==1){game_init(6, 10, 40, 40, 20);restgame=0;}
+                if(restgame==1){game_init(6, 10, 40, 40, 200);restgame=0;}
                 game_loop();
                 break;
             case 0:
